@@ -10,6 +10,13 @@ async function bootstrap() {
     }),
   );
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3003);
 }
-bootstrap();
+
+bootstrap()
+  .then(() => {
+    console.log(`Server started on port: ${process.env.PORT ?? 3003}`);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
