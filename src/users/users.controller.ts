@@ -15,6 +15,7 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UserDto } from './dtos/user.dto';
+import { User } from './user.entity';
 import { Serialize } from '../interceptors/serialize.interceptors';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
@@ -30,26 +31,11 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
-  // @Get('/colors/:color')
-  // setColor(@Param('color') color: string, @Session() session: any) {
-  //   session.color = color;
-  // }
-  // @Get('/colors')
-  // getColor(@Session() session: any) {
-  //   return session.color;
-  // }
-
-  // @Get('/whoami')
-  // async whoAmI(@Session() session: any) {
-  //   const user = await this.userService.findOne(session.userId);
-  //   if (!user) {
-  //     throw new NotFoundException('User not found');
-  //   }
-  //   return user;
-  // }
-
   @Get('/whoami')
-  async whoAmI(@CurrentUser() user: string) {
+  async whoAmI(@CurrentUser() user: User) {
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
     return user;
   }
 
