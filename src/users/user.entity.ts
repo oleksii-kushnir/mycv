@@ -22,6 +22,7 @@ export class User {
   LogInsert() {
     console.log('Inserted User with id', this.id);
   }
+
   @AfterUpdate()
   LogUpdate() {
     console.log('Updated User with id', this.id);
